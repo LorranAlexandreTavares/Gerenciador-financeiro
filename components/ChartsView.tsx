@@ -25,11 +25,12 @@ export const ChartsView: React.FC<Props> = ({ transactions }) => {
   const expenseData = useMemo(() => {
     const expenseByCategory = transactions
       .filter(t => t.type === 'expense')
-      // FIX: The return type of `reduce` was incorrectly inferred. Providing a generic argument to `reduce` correctly types the accumulator, resolving downstream errors.
-      .reduce<Record<string, number>>((acc, t) => {
+      // FIX: The `reduce` accumulator was not correctly typed, leading to downstream errors.
+      // By asserting the type of the initial value, we ensure `acc` is typed correctly.
+      .reduce((acc, t) => {
         acc[t.category] = (acc[t.category] || 0) + t.amount;
         return acc;
-      }, {});
+      }, {} as Record<string, number>);
 
     return Object.entries(expenseByCategory).map(([name, value]) => ({ name, value })).sort((a,b) => b.value - a.value);
   }, [transactions]);

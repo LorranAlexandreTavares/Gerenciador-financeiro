@@ -74,6 +74,19 @@ export const Dashboard: React.FC<DashboardProps> = ({ userData, onDataChange, on
     const daysInMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate();
     const daysRemaining = isCurrentMonth ? daysInMonth - now.getDate() : 0;
 
+    if (filteredTransactions.length === 0) {
+      return {
+        totalIncome: 0,
+        totalFixedExpenses: 0,
+        totalVariableExpenses: 0,
+        balance: 0,
+        savingsGoal: settings.savingsGoal,
+        dailySafeToSpend: 0,
+        totalSafeToSpend: 0,
+        daysRemaining: daysRemaining,
+      };
+    }
+
     let totalIncome = 0;
     let totalFixedExpenses = 0;
     let totalVariableExpenses = 0;
