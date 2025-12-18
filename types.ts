@@ -37,6 +37,15 @@ export interface SavingsGoal {
   targetAmount: number;
   currentAmount: number;
   deadline: string; // YYYY-MM-DD
+  startDate?: string; // YYYY-MM-DD
 }
 
 export type ViewType = 'home' | 'income' | 'expenses' | 'fixed' | 'variable' | 'goals';
+
+export interface UserData {
+  password: string;
+  settings: UserSettings;
+  transactions: Transaction[];
+  goals: SavingsGoal[];
+  hasCompletedOnboarding: boolean;
+}

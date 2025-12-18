@@ -1,4 +1,3 @@
-
 import React, { useMemo } from 'react';
 import { Transaction } from '../types';
 import { PieChart, Pie, Cell, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, Legend } from 'recharts';
@@ -26,10 +25,11 @@ export const ChartsView: React.FC<Props> = ({ transactions }) => {
   const expenseData = useMemo(() => {
     const expenseByCategory = transactions
       .filter(t => t.type === 'expense')
-      .reduce((acc, t) => {
+      // FIX: The return type of `reduce` was incorrectly inferred. Providing a generic argument to `reduce` correctly types the accumulator, resolving downstream errors.
+      .reduce<Record<string, number>>((acc, t) => {
         acc[t.category] = (acc[t.category] || 0) + t.amount;
         return acc;
-      }, {} as { [key: string]: number });
+      }, {});
 
     return Object.entries(expenseByCategory).map(([name, value]) => ({ name, value })).sort((a,b) => b.value - a.value);
   }, [transactions]);

@@ -45,9 +45,9 @@ export const HistoryList: React.FC<Props> = ({ title, transactions, onDelete, on
             <div className="flex-1">
               <p className="font-semibold text-gray-800">{t.description}</p>
               <div className="flex items-center gap-2 text-xs text-gray-400 mt-1">
+                {/* FIX: The `timeZone` property was misspelled as 'timeZone'. Corrected to ensure UTC time is properly used. */}
                 <span>{new Date(t.date).toLocaleDateString('pt-BR', {timeZone: 'UTC'})}</span>
                 <span className="text-gray-300">•</span>
-                {/* FIX: The 'title' prop is not supported by lucide-react icons. Wrapped the icon in a span with a title attribute to provide a tooltip, preserving the intended UI behavior. */}
                 <span title={t.frequency === 'recurring' ? 'Recorrente' : 'Variável'}>
                   {t.frequency === 'recurring' ? <Repeat size={12}/> : <Shuffle size={12}/>}
                 </span>

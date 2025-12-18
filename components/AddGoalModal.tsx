@@ -13,12 +13,14 @@ export const AddGoalModal: React.FC<Props> = ({ isOpen, onClose, onAdd }) => {
   const [name, setName] = useState('');
   const [targetAmount, setTargetAmount] = useState('');
   const [deadline, setDeadline] = useState('');
+  const [startDate, setStartDate] = useState(new Date().toISOString().split('T')[0]);
 
   useEffect(() => {
     if (!isOpen) {
       setName('');
       setTargetAmount('');
       setDeadline('');
+      setStartDate(new Date().toISOString().split('T')[0]);
     }
   }, [isOpen]);
 
@@ -30,6 +32,7 @@ export const AddGoalModal: React.FC<Props> = ({ isOpen, onClose, onAdd }) => {
         targetAmount: parseFloat(targetAmount),
         currentAmount: 0,
         deadline,
+        startDate,
       });
       onClose();
     }
@@ -66,6 +69,17 @@ export const AddGoalModal: React.FC<Props> = ({ isOpen, onClose, onAdd }) => {
               value={targetAmount}
               onChange={(e) => setTargetAmount(e.target.value)}
               placeholder="5000.00"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+              required
+            />
+          </div>
+          <div>
+            <label htmlFor="startDate" className="block text-sm font-medium text-gray-600 mb-1">Data de Início da Poupança</label>
+            <input
+              id="startDate"
+              type="date"
+              value={startDate}
+              onChange={(e) => setStartDate(e.target.value)}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
               required
             />
