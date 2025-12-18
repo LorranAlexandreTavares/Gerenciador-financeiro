@@ -1,0 +1,5 @@
+{
+  "name": "FinSimples: Seu Gerenciador Financeiro",
+  "description": "Um aplicativo de gerenciamento financeiro pessoal para rastrear receitas, despesas e metas de poupança com uma interface simples e intuitiva.",
+  "requestFramePermissions": []
+}
